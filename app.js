@@ -47,17 +47,23 @@ app.get("/artist-search", (req, res) => {
     );
 });
 
-app.get('/albums/:id',(req,res)=>{
-  const {id} = req.params;
- 
-  spotifyApi
-  .getArtistAlbums(id)
-  .then((data)=>{
-      res.render('albums',{albums:data.body.items})
-  })
-})
+app.get("/albums/:id", (req, res) => {
+  const { id } = req.params;
 
+  spotifyApi.getArtistAlbums(id)
+  .then((data) => {
+    res.render("albums", { albums: data.body.items });
+  });
+});
 
+app.get("/tracks/:id", (req, res) => {
+  const { id } = req.params;
+
+  spotifyApi.getAlbumTracks(id)
+  .then((data) => {
+    res.render("tracks", { tracks: data.body.items });
+  });
+});
 
 app.listen(3000, () =>
   console.log("My Spotify project running on port 3000 🎧 🥁 🎸 🔊")
